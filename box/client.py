@@ -610,6 +610,19 @@ class BoxClient(object):
             data['name'] = new_filename
 
         return self._request("post", 'files/{}/copy'.format(file_id), data=data).json()
+    def update_fileinfo(self, file_id, fileinfo):
+        """
+        Updates file info:
+            includes renaming, moving
+
+        Args:
+            - file_id: the id of the file we want to update
+            - fileinfo: dictionary containing the information to be updated
+
+        Returns:
+            - a dictionary with the new file metadata
+        """
+        return self._request("put", 'files/{}'.format(file_id), data=fileinfo).json()
 
     def share_link(self, file_id, access=ShareAccess.OPEN, expire_at=None, can_download=None, can_preview=None):
         """

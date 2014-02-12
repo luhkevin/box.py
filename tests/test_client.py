@@ -499,6 +499,11 @@ class TestClient(unittest.TestCase):
         result = client.copy_file(123, 666, 'goatse.cx')
         self.assertEqual({'id': '1'}, result)
 
+    def test_update_fileinfo(self):
+        client = self.make_client("put", 'files/123', data={'name': 'goodbye'}, result={'name': 'goodbye'})
+        result = client.update_fileinfo('123', {'name': 'goodbye'})
+        self.assertEqual({'name': 'goodbye'}, result)
+
     def test_share_link(self):
         # defaults
         args = {
